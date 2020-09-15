@@ -15,7 +15,7 @@
  <p><b>py PyPass</b></p>
  
  ### Main Features and Highlights
- * It is Open Source!
+ * It is fully Open Source!
  * It is Highly Portable and has robust Cross-Platform availability.
  * It Makes Password Reuse as securely as possible.
  * The code is Simple, Modular and Trustable which even beginners can audit for correctness.
