@@ -1,6 +1,6 @@
 # PyPass Password Manager v3.0
 
-<p>An Experimental ,simple ,secure ,crossplatform and trustable password Manager developed in Python3.</p>
+<p>An Experimental ,simple ,secure and trustable password Manager developed in Python3.</p>
 <img src="https://github.com/Anish-M-code/PyPass/blob/master/screenshots/1.cleaned.png">
 
 ### Usage
@@ -18,7 +18,7 @@
  * It is Open Source!
  * It is Highly Portable and has robust Cross-Platform availability.
  * It Makes Password Reuse as securely as possible.
- * The code is Simple , Modular and Trustable Code which even beginners can audit.
+ * The code is Simple, Modular and Trustable which even beginners can audit for correctness.
  * It does not use any third party modules other than standard python libraries.
  * It is Practically very hard to use Brute-force attacks to recover user passwords.
  * It Uses Robust Offline Password Backup System to backup passwords. 
