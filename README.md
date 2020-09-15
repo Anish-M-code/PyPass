@@ -25,7 +25,7 @@
  
  <img src="https://github.com/Anish-M-code/PyPass/blob/master/screenshots/10.cleaned.png">
  
- ### Notes
+ ### Note
  * This is an experimental code do not use it for any real world use.
  * Code has been Open sourced For Educational and Research Purpose only.
  * Developers not responsible for Any Damage arising from use of this Software.
