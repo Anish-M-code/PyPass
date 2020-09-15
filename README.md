@@ -30,6 +30,11 @@
  * Code has been Open sourced For Educational and Research Purpose only.
  * Developers not responsible for Any Damage arising from use of this Software.
  
+ ### Interested in our Project???
+ * visit our screenshot gallery: https://github.com/Anish-M-code/PyPass/blob/master/screenshots/Gallery.md
+ * Currently i consider this work as personal project so i don't expect public contributions.
+ * Feel free to create an issue if you feel something is missing or broken.
+ 
 
 
 
