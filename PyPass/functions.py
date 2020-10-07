@@ -23,7 +23,7 @@ unlockedkey=0
 try:
      import os
      import platform
-     import pysecret as p
+     import PyPass.pysecret as p
      import getpass
      import csv
 except ImportError:
