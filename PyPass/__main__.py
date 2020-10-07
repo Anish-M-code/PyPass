@@ -1,2 +1,2 @@
-import interface
-interface.main()
+import PyPass.interface
+PyPass.interface.main()
