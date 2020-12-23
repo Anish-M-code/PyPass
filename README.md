@@ -9,7 +9,7 @@ Quick Installation
 Install from [PyPI](https://pypi.org/project/passwordsgo/):
 
 ```
-pip passwordsgo
+pip install passwordsgo
 ```
 Then run following commands in terminal/powershell to get started:-
 
