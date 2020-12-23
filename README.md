@@ -6,12 +6,14 @@
 Quick Installation
 ------------------
 
-Install from [PyPI](https://pypi.org/project/passwordsgo/):
+To Install from [PyPI](https://pypi.org/project/passwordsgo/):
+
+Run the following commands in Linux terminal / Windows powershell / command prompt to get started:-
 
 ```
 pip install passwordsgo
 ```
-Then run following commands in terminal/powershell to get started:-
+Then :-
 
 For Windows:
 ```
