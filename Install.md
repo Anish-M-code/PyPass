@@ -1,6 +1,6 @@
-Prerequisite : -
+### Prerequisite : -
 
-Git must be installed in the computer.
+Git and Python 3 must be installed in the computer.
 
 Run the following commands in Linux terminal / Windows powershell / command prompt to download.
 
