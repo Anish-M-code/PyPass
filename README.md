@@ -1,4 +1,4 @@
-# PyPass Password Manager v3.0
+# PyPass Password Manager v3.2
 
 <p>An Experimental ,simple ,secure and trustable password Manager developed in Python3.</p>
 <img src="https://github.com/Anish-M-code/PyPass/blob/master/screenshots/1.cleaned.png">
@@ -8,20 +8,15 @@ Quick Installation
 
 To Install from [PyPI](https://pypi.org/project/passwordsgo/):
 
-Run the following commands in Linux terminal / Windows powershell / command prompt to get started:-
+Run the following commands in Linux terminal / Windows powershell / command prompt to install:-
 
 ```
 pip install passwordsgo
 ```
-Then :-
+Then To get started , simply type :-
 
-For Windows:
 ```
-py -m passwordsgo
-```
-For Linux based Distributions:
-```
-python3 -m passwordsgo
+passwordsgo
 ```
  
  ### Main Features and Highlights
