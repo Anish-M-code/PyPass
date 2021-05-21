@@ -1,10 +1,16 @@
 
-#This Python module contains menu interfaces for pypass project.
-#Developed by M.Anish only.
+'''
+This Python module contains menu interfaces for PyPass project.
+Developed by M.Anish only.
+'''
 
-lock=0
+# variable to mark if check is done to verify PyPassDB folder is present or not,
+#  0 check not done , 1 means check done.
+lock = 0
 
 try:
+    import os
+    import sys
     import PyPass.pysecret as s
     import PyPass.functions as f
 except ImportError:
@@ -12,116 +18,126 @@ except ImportError:
     x=input(' Press any key to continue...')
     exit(1)
 
-def mandb():
-  f.cls()
-  f.load()
-  f.cls()
-  print('\n     === PyPass DB Manager Menu ===')
-  print('\n 1)Create Account\n 2)View Accounts\n 3)Display Account\n 4)Delete Account\n 5)Modify Account')
-  x=input('\n Enter choice:')
-  if x=='1':
-     f.createac()
-     f.pause()
-     f.cls()
-     mandb()
-     exit(0)
-  elif x=='2':
-     f.viewac()
-     f.pause()
-     f.cls()
-     mandb()
-     exit(0)
-  elif x=='3':
-     f.display()
-     f.pause()
-     f.cls()
-     mandb()
-     exit(0)
-  elif x=='4':
-     f.delac()
-     f.pause()
-     f.cls()
-     mandb()
-     exit(0)
-  elif x=='5':
-     f.modac()
-     f.pause()
-     f.cls()
-     mandb()
-     exit(0)
-  elif x.lower()=='c':
+# Prints user interface for Database Manager.
+def mandb(db):
+   db=f.valid_db(db)
+   if f.check(db)==False:
+      return 
+   f.cls()
+   print('\n     === PyPass DB Manager Menu ===')
+   print('\n 1)Create Account\n 2)View Accounts\n 3)Display Account\n 4)Delete Account\n 5)Modify Account')
+   x=input('\n Enter choice:')
+   if x=='1':
+      account=input('\n Enter Account Name:')
+      username=input('\n Enter Username:')
+      website=input('\n Enter Website:')
+      f.create_account(db,account,username,website)
+      f.pause()
+      f.cls()
+      mandb(db)
+     
+   elif x=='2':
+      f.view_accounts(db)
+      f.pause()
+      f.cls()
+      mandb(db)
+     
+   elif x=='3':
+      account=input('\n Enter Account Name:')
+      f.view_account(db,account)
+      f.pause()
+      f.cls()
+      mandb(db)
+     
+   elif x=='4':
+      account=input('\n Enter Account Name:')
+      username=input('\n Enter Username:')
+      f.delete_account(db,account,username)
+      f.pause()
+      f.cls()
+      mandb(db)
+
+   elif x=='5':
+      account=input('\n Enter Account Name:')
+      username=input('\n Enter Username:')
+      f.modify_account(db,account,username)
+      f.pause()
+      f.cls()
+      mandb(db)
+
+   elif x.lower()=='c':
       exit()
-  elif x.lower()=='mm':
-      f.release()
+   elif x.lower()=='mm':
       main()
-      exit()
   
-  else:
-     print('\n Please enter a valid choice from 1,2,3,4 or 5')
-     f.pause()
-     f.cls()
-     mandb()
-     exit(1)
-	
-  
+   else:
+      print('\n Please enter a valid choice from 1,2,3,4 or 5\n')
+      f.pause()
+      f.cls()
+      mandb(db)	
+
+# Prints main menu for user interface.  
 def main():
-  global lock
-  if lock==0:
-    f.init()
-    lock+=1
-  f.cls()
-  print('\n     === PyPass Password Manager v3.0 ===')
-  print('\n Menu:-\n\n 1)Create Database\n 2)View Database\n 3)Manage Database\n 4)Delete Database\n 5)Import Database\n 6)Export Database\n 7)Backup Masterkey ')
-  x=input('\n Enter choice:')
-  if x=='1':
-     f.createdb()
-     f.pause()
-     f.cls()
-     main()
-     exit(0)
-  elif x=='2':
-     f.viewdb()
-     f.pause()
-     f.cls()
-     main()
-     exit(0)
-  elif x=='3':
-     global count
-     mandb()
-     f.pause()
-     f.cls()
-     main()
-     exit(0)
-  elif x=='4':
-     f.deldb()
-     f.pause()
-     f.cls()
-     main()
-     exit(0)
-  elif x=='7':
-     s.mm()
-     f.pause()
-     f.cls()
-     main()
-     exit(0)
-  elif x=='6':
-     f.export()
-     f.pause()
-     f.cls()
-     main()
-     exit(0)
-  elif x=='5':
-     f.importt()
-     f.pause()
-     f.cls()
-     main()
-     exit(0)
-  elif x.lower()=='c':
-     exit(0)
-  else:
-     print('\n Please enter a valid choice from 1,2,3,4 or 5')
-     f.pause()
-     f.cls()
-     main()
-     exit(1)
+   global lock
+   if lock==0:
+      f.init()
+      lock=1
+   f.cls()
+   print('\n     === PyPass Password Manager v3.2 ===')
+   print('\n Menu:-\n\n 1)Create Database\n 2)View Database\n 3)Manage Database\n 4)Delete Database\n 5)Import Database\n 6)Export Database\n 7)Backup Masterkey ')
+   x=input('\n Enter choice:')
+   if x=='1':
+      dbname=input('\n Enter Database Name:')
+      f.cls()
+      f.create_database(dbname)
+      f.pause()
+      f.cls()
+      main()
+   elif x=='2':
+      f.cls()
+      f.view_databases()
+      f.pause()
+      f.cls()
+      main()
+   elif x=='3':
+      dbname=input('\n Enter Database Name:')
+      mandb(dbname)
+      f.pause()
+      f.cls()
+      main()
+   elif x=='4':
+      dbname=input('\n Enter Database Name:')
+      f.cls()
+      f.delete_database(dbname)
+      f.pause()
+      f.cls()
+      main()
+   elif x=='7':
+      s.mm()
+      f.pause()
+      f.cls()
+      main()
+   elif x=='6':
+      dbname=input('\n Enter Database Name:')
+      print()
+      f.export(dbname)
+      f.pause()
+      f.cls()
+      main()
+   elif x=='5':
+      db=input('\n Enter Database Name:')
+      print()
+      f.importt(db)
+      f.pause()
+      f.cls()
+      main()
+   elif x.lower()=='c':
+      sys.exit(0)
+   else:
+      print('\n Please enter a valid choice from 1,2,3,4 or 5\n')
+      f.pause()
+      f.cls()
+      main()
+
 	
+
