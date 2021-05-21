@@ -13,11 +13,12 @@ Run the following commands in Linux terminal / Windows powershell / command prom
 ```
 pip install passwordsgo
 ```
-Then To get started , simply type :-
+Then to get started , simply type :-
 
 ```
 passwordsgo
 ```
+ To run program by directly downloading from github refer [ Instructions](/Install.md) here.
  
  ### Main Features and Highlights
  * It is fully Open Source!
