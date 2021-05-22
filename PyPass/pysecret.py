@@ -44,19 +44,15 @@ def f(x):
     
 #converts base 36 numbers to alphanumeric charactors.
 def rf(x):
-  store=[]
-  q=''
-  for s in x:
-    count=0
-    for i in range(36):
-        if i==s:
-          store.append(A[i])
-          count=1
-          break
-    if count==0:
-      store.append(' ')
-  q=''.join(store)
-  return q
+    store = []
+    q = ''
+    for s in x:
+        try:
+            store.append(A[s])
+        except(IndexError, TypeError):
+            store.append(' ')
+    q = ''.join(store)
+    return q
     
 #generates a key without keyfile.
 def ikey(x):
