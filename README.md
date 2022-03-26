@@ -1,4 +1,4 @@
-# PyPass Password Manager v3.2
+# PyPass Password Manager v3.2.2
 
 <p>An Experimental ,simple ,secure and trustable password Manager developed in Python3.</p>
 <img src="https://github.com/Anish-M-code/PyPass/blob/master/screenshots/1.cleaned.png">

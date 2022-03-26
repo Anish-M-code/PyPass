@@ -1,3 +1,3 @@
-import PyPass.interface
-import PyPass.functions
-import PyPass.pysecret
+import interface
+import functions
+import pysecret

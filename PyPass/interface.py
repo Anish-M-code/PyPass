@@ -11,8 +11,8 @@ lock = 0
 try:
     import os
     import sys
-    import PyPass.pysecret as s
-    import PyPass.functions as f
+    import pysecret as s
+    import functions as f
 except ImportError:
     print(' Critical Error: Required Modules Not found!\n')
     x=input(' Press any key to continue...')

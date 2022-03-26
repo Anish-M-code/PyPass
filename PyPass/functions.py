@@ -8,7 +8,7 @@ import csv
 import time
 
 try:
-    import PyPass.pysecret as p
+    import pysecret as p
 except ImportError:
     print(" Critical Error : Required Modules Not Found !!!")
 
