@@ -23,7 +23,7 @@ def en(msg,salt):
     if len(x)<=len(y):
         for i in range(len(x)):
             if type(x[i])==int and type(y[i])==int:
-                ciphertxt.append(((x[i]+y[i])%36))
+                ciphertxt.append(((x[i]+y[i])%84))
             else:
                 ciphertxt.append(' ')
     else:

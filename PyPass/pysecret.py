@@ -1,6 +1,6 @@
 
 # Pysecret
-# Copyright (C) 2018-2020 M.Anish <aneesh25861@gmail.com>
+# Copyright (C) 2018-2022 M.Anish <aneesh25861@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,15 +26,15 @@ except ImportError:
     x=input(' Press any key to continue...')
     exit(1)
 
-A=('A','B','C','D','E','F','G','H','I','J','K','L','M','N','o','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9')
+A=('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','!','@','#','$','%','^','&','*','(',')','-','+','_','=','{','}','[',']','<','>','?','|')
 
-#converts Alphanumeric characters to numbers of base 36    
+#converts Alphanumeric characters to numbers of base 84.    
 def f(x):
   store=[]
   for s in x:
     count=0
-    for i in range(36):
-        if A[i].lower()==s.lower():
+    for i in range(84):
+        if A[i]==s:
           store.append(i)
           count=1
           break
@@ -42,7 +42,7 @@ def f(x):
       store.append(' ')
   return tuple(store)                
     
-#converts base 36 numbers to alphanumeric charactors.
+#converts base 84 numbers to alphanumeric charactors.
 def rf(x):
     store = []
     q = ''
@@ -56,7 +56,7 @@ def rf(x):
     
 #generates a key without keyfile.
 def ikey(x):
-    seed=list(range(36))
+    seed=list(range(84))
     masterkey=[]
     for i in range(len(x)):
         masterkey.append(secrets.choice(seed))
@@ -69,7 +69,7 @@ def en(msg):
     y=ikey(msg)
     for i in range(len(x)):
             if type(x[i])==int :
-                ciphertxt.append(((x[i]+y[i])%36))
+                ciphertxt.append(((x[i]+y[i])%84))
             else:
                 ciphertxt.append(' ')
     ctxt=rf(tuple(ciphertxt))
@@ -84,7 +84,7 @@ def de(c,k):
     if len(x)<=len(y):
         for i in range(len(x)):
             if type(x[i])==int and type(y[i])==int:
-                ciphertxt.append(((x[i]-y[i])%36))
+                ciphertxt.append(((x[i]-y[i])%84))
             else:
                 ciphertxt.append(' ')
     else:
