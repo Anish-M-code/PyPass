@@ -1,6 +1,6 @@
 # PyPass Password Manager v3.2.2
 
-<p>A simple ,Highly secure and trustable password Manager developed in Python3.</p>
+<p>A simple , highly secure and trustable password Manager developed in Python3.</p>
 <img src="https://github.com/Anish-M-code/PyPass/blob/master/screenshots/1.cleaned.png">
 
 Quick Installation
@@ -29,7 +29,14 @@ passwordsgo
  * It is Practically very hard to use Brute-force attacks to recover user passwords.
  * It Uses Robust Offline Password Backup System to backup passwords. 
  
+ <br>
+
  <img src="https://github.com/Anish-M-code/PyPass/blob/master/screenshots/10.cleaned.png" width=800 height=600>
+ 
+ ### Interested in our Project???
+ * visit our screenshot gallery: https://github.com/Anish-M-code/PyPass/blob/master/screenshots/Gallery.md
+ * Currently i consider this work as personal project so i don't expect public contributions.
+ * Feel free to create an issue if you feel something is missing or broken.
  
  ### FAQ
  
@@ -80,10 +87,7 @@ passwordsgo
 
    Please raise an github issue :)
  
- ### Interested in our Project???
- * visit our screenshot gallery: https://github.com/Anish-M-code/PyPass/blob/master/screenshots/Gallery.md
- * Currently i consider this work as personal project so i don't expect public contributions.
- * Feel free to create an issue if you feel something is missing or broken.
+ 
  
 
 
