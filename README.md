@@ -40,8 +40,10 @@ passwordsgo
  * Feel free to create an issue if you feel something is missing or broken.
  * For frequently asked Questions refer [ FAQ ](/FAQ.md) here.
   
- 
- 
+ ### Warnings
+
+ * Please read [ FAQ ](/FAQ.md) before use, this not an ordinary password manager.
+ * Developer not responsible for any damage from use of this program.
 
 
 
