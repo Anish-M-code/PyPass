@@ -16,11 +16,11 @@ Then to get started : -
 For Windows:
 
 ```
-py -m PyPass
+py PyPass
 ```
 
 For Linux based Distributions:
 
 ```
-python3 -m PyPass
+python3 PyPass
 ```
