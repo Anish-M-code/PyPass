@@ -31,7 +31,7 @@ passwordsgo
  
  <br>
 
- <img src="https://github.com/Anish-M-code/PyPass/blob/master/screenshots/10.cleaned.png" width=800 height=600>
+ <img src="https://github.com/Anish-M-code/PyPass/blob/master/screenshots/10.cleaned.png">
  
  ### Interested in our Project???
  * visit our screenshot gallery: https://github.com/Anish-M-code/PyPass/blob/master/screenshots/Gallery.md
