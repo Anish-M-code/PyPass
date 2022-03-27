@@ -27,7 +27,7 @@
   
   - <b> My Password Manager has more features like online sync , extensions , Why use an offline Password Manager like Yours? </b>
    
-   Google Project Zero's Researcher Tavis Ormandy has a explaination refer https://lock.cmpxchg8b.com/passmgrs.html 
+   Google Project Zero's Researcher Tavis Ormandy has a explaination refer https://lock.cmpxchg8b.com/passmgrs.html .
    This password manager has less features and hence less security bugs :)
    
    - <b> Why use custom Cryptography ? , how do we know it is secure ? </b>

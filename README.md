@@ -23,6 +23,7 @@ passwordsgo
  ### Main Features and Highlights
  * It is free and fully Open Source!
  * It uses Quantum Safe Cryptography.
+ * Operating System Independent.
  * If used correctly it supports plausible deniability of passwords.
  * The code is Simple, Modular and Trustable which even beginners can audit for correctness.
  * It does not use any third party modules other than standard python libraries.
