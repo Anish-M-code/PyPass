@@ -65,12 +65,20 @@ passwordsgo
   
   - <b> My Password Manager has more features like online sync , extensions , Why use an offline Password Manager like Yours? </b>
    
-   Google Project Zero's Security Researcher Tavis Ormandy has a better explaination refer here https://lock.cmpxchg8b.com/passmgrs.html 
+   Google Project Zero's Researcher Tavis Ormandy has a explaination refer https://lock.cmpxchg8b.com/passmgrs.html 
    This password manager has less features and hence less security bugs :)
    
-   - <b> Why use custom Cryptography ? , how do we know it is secure ?
+   - <b> Why use custom Cryptography ? , how do we know it is secure ? </b>
  
    We use custom cryptography because most other ciphers are highly complex and humans cannot compute them easily.
+   We aim to backup password databases by printing them on paper and allow people to compute passwords manually.
+   Paper has long retention capacity than any electronic media and might serve as good backup.
+ 
+   As for cryptography we don't use custom one , we use One Time Pad Cipher. 
+   
+   - <b> I have found a security issue or more questions , how to contact ? </b>
+
+   Please raise an github issue :)
  
  ### Interested in our Project???
  * visit our screenshot gallery: https://github.com/Anish-M-code/PyPass/blob/master/screenshots/Gallery.md
