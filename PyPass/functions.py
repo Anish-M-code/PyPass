@@ -293,7 +293,7 @@ def view_account(db,account):
     if check(db)==False:
         return
     task_start()
-    masterpassword=getpass.getpass(' Enter Password:')
+    masterpassword=getpass.getpass(' Enter Master Password:')
     masterkey=get_masterpassword(db)
     masterkey=en(masterpassword,masterkey)
     connect=sqlite3.connect(db)
@@ -302,9 +302,13 @@ def view_account(db,account):
         output=cursor.execute("select account ,username , password , website from passwordb where account=?  ",(account,)).fetchall()
         print(' Account:',output[0][0])
         print(' Username:',output[0][1])
-        print(' Password:',en(output[0][2],masterkey))
+        
         if output[0][3].lower() != 'null':
             print(' Website:',output[0][3])
+
+        print('\n Generated Password:-\n',en(output[0][2],masterkey))
+
+        if output[0][3].lower() != 'null':
             choice=input('\n Do you want to open website in Browser?(Y/N):')
             if choice.lower() == 'y':
                 webbrowser.open(output[0][3])
@@ -340,6 +344,11 @@ def export(db):
 def importt(db):
     db=valid_db(db)
     task_start()
+    file=input(' Enter csv file to import:')
+    if os.path.exists(file) is False:
+        print('File Not Found!')
+        task_fail()
+        exit(1)
     password=getpass.getpass(' Enter Secret Token:')
     if len(password)%32 != 0:
         print('\n\a Invalid Token!!!')
@@ -385,15 +394,15 @@ def importt(db):
                         password varchar(640),
                         website varchar(200)
                         )''')
-    file=input(' Enter csv file to import:')
+    
     os.chdir('..')
     try:
         with open(file,newline='') as csvfile:
             reader=csv.reader(csvfile,dialect='excel')
             for line in reader:
                 cursor.execute('insert into passwordb values(?,?,?,?)',(line[0],line[1],line[2],line[3]))
-    except FileNotFoundError:
-        print(' File Doesnot exist!!!')
+    except Exception as e:
+        print(e)
         exit(1)
     os.chdir('PyPassDB')
     connect.commit()

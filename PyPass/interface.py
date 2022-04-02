@@ -83,7 +83,7 @@ def main():
       f.init()
       lock=1
    f.cls()
-   print('\n     === PyPass Password Manager v3.2.2 ===')
+   print('\n     === PyPass Password Manager v4.0 ===')
    print('\n Menu:-\n\n 1)Create Database\n 2)View Database\n 3)Manage Database\n 4)Delete Database\n 5)Import Database\n 6)Export Database\n 7)Backup Masterkey ')
    x=input('\n Enter choice:')
    if x=='1':
