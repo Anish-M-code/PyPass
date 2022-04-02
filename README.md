@@ -1,4 +1,4 @@
-# PyPass Password Manager v3.2.2
+# PyPass Password Manager v4.0
 
 <p>A simple , highly secure, trustable and Quantum safe password Manager developed in Python3.</p>
 <img src="https://github.com/Anish-M-code/PyPass/blob/master/screenshots/1.cleaned.png">
