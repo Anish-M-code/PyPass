@@ -43,7 +43,7 @@
    password storage system is no weaker than modern cryptosystems.
    
    Incase you need Information-theoretic security you can export the password database as csv and fill the values of keys using randomness generated
-   from true random number source or trustworthy source like pair of dices ( hope you use a blanket so that no one can see the random results )  
+   from true random number source or trustworthy source like pair of dices or any number of combination of dices or coins ( hope you use a blanket so that no one can see the random results generated and being typed in csv using a computer )  
    
    - <b> How to make use of Plausible deniability </b>
 
@@ -51,6 +51,12 @@
    but the master password is not validated , so simply use another value of master password you will get different value for user password which can be used for plausible deniability. use 2nd master password as steath/hidden password to retrieve your deniable passwords.
 
    In this way you can use your master password for normal accounts & use stealth master password for getting stealthy deniable passwords.
+   
+   - <b> Why doesn't this password manager prevent shoulder surfing by hiding passwords and allow copy to clipboard feature ? </b>
+   
+   I believe password managers are supposed to be used in a lonely place and you should cover yourself in a blanket before using them , password managers should not be used  in a place full of people , even if you have have feature to not display password and copy to clipboard , bystanders can simply snatch your computer and get your password while password manager is unlocked and you have copied password to clipboard.
+   
+   Second reason is it is difficult to implement such a feature in a command line program and making it cross platform securely.
 
    - <b> I have found a security issue or more questions , how to contact ? </b>
 
