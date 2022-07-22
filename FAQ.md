@@ -3,7 +3,7 @@
  
  - <b> Is this password manager secure ? </b>
  
- yes , this password manager is reasonably secure. provided an attacker doesnot gains access to your password manager database keyfiles and any one password generated using those database keyfiles.
+ yes , this password manager is reasonably secure. provided an attacker doesnot gains access to your password manager database keyfiles and gets any one password generated using those database keyfiles.
  
  In Lay man's language , this password manager is extremely secure for the following purposes:-
  
@@ -19,7 +19,7 @@
  
  However there is a way to mitigate this , you can create 3 separate database ( We recommend more than 3 ) with unique master passwords and use one of them for highly sensitive tasks like protecting PGP keys , Full disk encryption , Bank passwords etc, another database for High Security passwords like Gmail , Linkedin which are highly unlikely to get breached , and the other database for storing passwords for Less secure Applications.
  
- The advantage of this Compartmentalization is that if one of the database gets compromised the other password databases won't be affected if you use unique passwords.
+ The advantage of this Compartmentalization is that if one of the database gets compromised the security of other password databases won't be affected if you use unique passwords.
  
  - <b> Why Another Password Manager ? </b>
  
@@ -36,7 +36,14 @@
    We aim to backup password databases by printing them on paper and allow people to compute passwords manually.
    Paper has long retention capacity than any electronic media and might serve as good backup.
  
-   As for cryptography we use One Time Pad Cipher tweaked for this project , with no loss in security. 
+   As for cryptography we use One Time Pad Cipher tweaked for this project , which is as secure as source of randomness.
+   This program gets randomness from secrets standard module in python which is cryptographically secure , this essentially
+   converts the one time pad cipher to a stream cipher which is secure enough to keep your passwords safe. The secrets module in python 
+   can be used for secure randomness source for iv , nonces etc which are heavily used in Modern cryptography , this gurantees this 
+   password storage system is no weaker than modern cryptosystems.
+   
+   Incase you need Information-theoretic security you can export the password database as csv and fill the values of keys using randomness generated
+   from true random number source or trustworthy source like pair of dices ( hope you use a blanket so that no one can see the random results )  
    
    - <b> How to make use of Plausible deniability </b>
 
