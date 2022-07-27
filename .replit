@@ -1,2 +1,2 @@
 language = "python3"
-run = "python3 PyPass"
+run = "python3 -m pip install passwordsgo && passwordsgo"
