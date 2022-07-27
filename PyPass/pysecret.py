@@ -17,32 +17,43 @@
 
 ''' Pysecret is a simple secret sharing tool using python3 developed by M.Anish only.
     Converts secrets to more than one code . The secret can't be recovered even if a single code is missing'''
+
 try:
     import os
+    import sys
     import getpass
     import secrets
 except ImportError:
     print(' Critical Error: Required Modules Not found!\n')
-    x=input(' Press any key to continue...')
-    exit(1)
+    x = input(' Press any key to continue...')
+    sys.exit(1)
 
-A=('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','!','@','#','$','%','^','&','*','(',')','-','+','_','=','{','}','[',']','<','>','?','|')
+A = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','!','@','#','$','%','^','&','*','(',')','-','+','_','=','{','}','[',']','<','>','?','|')
 
-#converts Alphanumeric characters to numbers of base 84.    
+# convert Alphanumeric characters to numbers of base which is equal to length of variable A.    
 def f(x):
-  store=[]
+  store = []
+
   for s in x:
-    count=0
-    for i in range(84):
-        if A[i]==s:
-          store.append(i)
-          count=1
-          break
-    if count==0:
+    count = 0
+    for i in range(len(A)):
+        if A == ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','o','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'):
+            if A[i].lower() == s.lower():
+                store.append(i)
+                count = 1
+                break
+        else:
+
+            if A[i] == s:
+                store.append(i)
+                count = 1
+                break
+
+    if count == 0:
       store.append(' ')
   return tuple(store)                
     
-#converts base 84 numbers to alphanumeric charactors.
+# converts numbers to alphanumeric charactors.
 def rf(x):
     store = []
     q = ''
@@ -54,88 +65,89 @@ def rf(x):
     q = ''.join(store)
     return q
     
-#generates a key without keyfile.
+# generates a key without keyfile.
 def ikey(x):
-    seed=list(range(84))
-    masterkey=[]
+    seed = list(range(len(A)))
+    masterkey = []
     for i in range(len(x)):
         masterkey.append(secrets.choice(seed))
     return tuple(masterkey)
 
-#encrypts a given string and returns ciphertxt and key as a tuple. (no file generated!)
+# encrypts a given string and returns ciphertxt and key as a tuple. (no file generated!)
 def en(msg):
-    ciphertxt=[]
-    x=f(msg)
-    y=ikey(msg)
+    ciphertxt = []
+    x = f(msg)
+    y = ikey(msg)
     for i in range(len(x)):
-            if type(x[i])==int :
-                ciphertxt.append(((x[i]+y[i])%84))
+            if type(x[i]) is int :
+                ciphertxt.append(((x[i] + y[i]) % len(A)))
             else:
                 ciphertxt.append(' ')
-    ctxt=rf(tuple(ciphertxt))
-    shk=rf(y)
-    return (ctxt,shk)
+    ctxt = rf(tuple(ciphertxt))
+    shk = rf(y)
+    return (ctxt, shk)
 
-#decrypts a given encrypted string and returns a plaintxt as output.
-def de(c,k):
-    ciphertxt=[]
-    x=f(c)
-    y=f(k)
-    if len(x)<=len(y):
+# decrypts a given encrypted string and returns a plaintxt as output.
+def de(c, k):
+    ciphertxt = []
+    x = f(c)
+    y = f(k)
+    if len(x) <= len(y):
         for i in range(len(x)):
-            if type(x[i])==int and type(y[i])==int:
-                ciphertxt.append(((x[i]-y[i])%84))
+            if type(x[i]) is int and type(y[i]) is int:
+                ciphertxt.append(((x[i] - y[i]) % len(A)))
             else:
                 ciphertxt.append(' ')
     else:
-        x=input(' Press any key to continue...')
-        exit(1)
+        x = input(' Press any key to continue...')
+        sys.exit(1)
     return rf(tuple(ciphertxt))
 
-#function for secret splitting interface.
+# function for secret splitting interface.
 def sprocess():
-    table=[]
+    table = []
     print('''\n          ---------------------------------------------------------
           |                Backup Code Generator                  |
           ---------------------------------------------------------''')
-    while(1):
+    while 1:
         try:
-            x=int(input('\n Enter the number of backup codes(atmost 10,atleast 2):'))
-            if(x<11)and(x>1):
+            x = int(input('\n Enter the number of backup codes(atmost 10,atleast 2):'))
+            if(x < 11)and(x > 1):
                 break
         except ValueError:
             print('\n Please enter a valid integer greater than 1 but less than or equal to 10!\n')
-    msg=getpass.getpass(' Enter the master password:')
-    table+=list(en(msg))
-    for i in range(2,x):
-        tmp=table[-1]
-        table.pop()
-        table+=list(en(tmp))
-    for i in range(len(table)):
-        print('CODE',i+1,':',table[i])
+    msg = getpass.getpass(' Enter the master password:')
 
-#function for secret combining interface.
+    table += list(en(msg))
+    for i in range(2,x):
+        tmp = table[-1]
+        table.pop()
+        table += list(en(tmp))
+    for i in range(len(table)):
+        print('CODE',i + 1,':',table[i])
+
+# function for secret combining interface.
 def cprocess():
-    table=[]
+    table = []
     print('''\n          ---------------------------------------------------------
           |                Recover Password from Code              |
           ----------------------------------------------------------''')
-    while(1):
+    while 1:
         try:
-            x=int(input('\n Enter no. of backup codes to combine(atmost 10,atleast 2):'))
-            if(x<11)and(x>1):
+            x = int(input('\n Enter no. of backup codes to combine(atmost 10,atleast 2):'))
+            if(x < 11)and( x > 1):
                 break
         except ValueError:
                 print('\n Please enter a valid integer greater than 1 but less than or equal to 10!\n')
     for i in range(x):
-            table.append(getpass.getpass(str(' Enter Code '+str(i+1)+':')))
-    for i in range(x-1):
-            hook=[]
-            a,b=table[-2],table[-1]
+            table.append(getpass.getpass(str(' Enter Code '+str(i + 1)+':')))
+    for i in range(x - 1):
+            hook = []
+            a, b = table[-2], table[-1]
             table.pop()
             table.pop()
-            hook.append(de(a,b))
-            table+=hook
+            hook.append(de(a, b))
+            table += hook
     print()
     print(''.join(table))
         
@@ -157,18 +169,18 @@ def tskf():
 
 
 def wait():
-      x=input('\n Press any key to continue...\n')
+      x = input('\n Press any key to continue...\n')
 
 def display(file):
-        if os.path.exists(file)==False:
-           print('Error: '+file+' not found!')
+        if os.path.exists(file) is False:
+           print('Error: '+ file +' not found!')
            wait()
-           exit(1)
+           sys.exit(1)
         with open(file,'r') as f:
-            s=f.read(1024)
+            s = f.read(1024)
             print(s)
-            while len(s)>0:
-                s=f.read(1024)
+            while len(s) > 0:
+                s = f.read(1024)
                 print(s)
 
 # function for main interface.    
@@ -178,19 +190,19 @@ def mm():
            ---------------------------------------------------''')
    print('\n 1)Backup Code Generator.')
    print(' 2)Recover Password from codes.')
-   cmd=input('\n Enter command:')
-   if cmd=='1':
+   cmd = input('\n Enter command:')
+   if cmd == '1':
        sprocess()
        mm()
-   elif cmd=='2':
+   elif cmd == '2':
        cprocess()
        mm()
-   elif cmd.lower()=='c' or cmd.lower()=='close':
-      exit()
+   elif cmd.lower() == 'c' or cmd.lower() == 'close':
+      sys.exit(0)
    else:
       print(' please enter 1 or 2 or \'c\' to exit!')
       mm()
-   exit()
+   sys.exit(0)
     
    
         
