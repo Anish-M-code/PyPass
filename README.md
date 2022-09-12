@@ -49,6 +49,8 @@ Run PyPass on Repl.it from here:- .[![Run on Repl.it](https://repl.it/badge/gith
 
  * Please read [ FAQ ](/FAQ.md) before use, this not an ordinary password manager.
  * Developer not responsible for any damage from use of this program.
+ 
+ #### PyPass may eat data, Take proper password backups by printing csv files after exporting , Use it with caution. Author is not a Professional Cryptographer
 
 
 
