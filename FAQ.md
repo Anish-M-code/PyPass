@@ -21,6 +21,10 @@
  
  The advantage of this Compartmentalization is that if one of the database gets compromised the security of other password databases won't be affected if you use unique passwords.
  
+ - <b> If this password Manager is secure why are you recommending against high security use ? </b>
+ 
+ Because this work has not been peer reviewed by security experts and i am not an expert myself.
+ 
  - <b> Why Another Password Manager ? </b>
  
   Because most other password managers use complex cryptography and have huge amount of code which cannot be easily trusted. Moreover in certain special cases like for use with Veracrypt Hidden volumes this password manager supports plausible deniability which is not present in other password managers. And unlike other password managers this password manager cannot be bruteforced to give away passwords. See the question above for limitations.
