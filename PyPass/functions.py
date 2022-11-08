@@ -14,10 +14,12 @@ except ImportError:
     print(" Critical Error : Required Modules Not Found !!!")
 
 # encrypts a given string and key and returns ciphertext
+
+
 def en(msg, salt):
     ciphertxt = []
     if len(msg) < len(salt):
-        msg = msg + '0' * (len(salt) - len(msg)) 
+        msg = msg + '0' * (len(salt) - len(msg))
     x = p.f(msg)
     y = salt
     y = p.f(y)
@@ -34,35 +36,44 @@ def en(msg, salt):
     ctxt = p.rf(ciphertxt)
     return ctxt
 
+
 def valid_db(db):
     if db.endswith('.cry'):
         return db
     return db+'.cry'
 
+
 def check(db):
     if os.path.exists(db) is False:
         print('\n Database doesnot exist!!!\n')
         return False
-        
+
+
 def init():
     if os.path.exists('PyPassDB') is False:
-       os.mkdir('PyPassDB')
+        os.mkdir('PyPassDB')
     os.chdir('PyPassDB')
 
+
 def cls():
-    os.system("cls" if platform.system().lower() == "windows" else "clear" )
+    os.system("cls" if platform.system().lower() == "windows" else "clear")
+
 
 def pause():
     p.wait()
-        
+
+
 def task_start():
     p.start()
+
 
 def task_end():
     p.end()
 
+
 def task_fail():
     p.tskf()
+
 
 def generate_key(msg):
     c_msg = len(msg) / 32
@@ -73,19 +84,18 @@ def generate_key(msg):
     key = p.rf(key)
     return key
 
-        
 
 def create_masterpassword(db):
     db = valid_db(db)
     while 1:
 
         while 1:
-             mpassword1 = getpass.getpass(" Create Master Password:")
+            mpassword1 = getpass.getpass(" Create Master Password:")
 
-             if len(mpassword1) > 9 :
-                 break
-             else:
-                 print(" The Password must be atleast 10 characters long.\n")
+            if len(mpassword1) > 9:
+                break
+            else:
+                print(" The Password must be atleast 10 characters long.\n")
 
         mpassword2 = getpass.getpass(" Re-enter Master Password:")
         if mpassword1 == mpassword2:
@@ -96,22 +106,24 @@ def create_masterpassword(db):
                         database varchar(250) primary key ,
                         password varchar(2000) not null 
                         )''')
-                cursor.execute('insert into map values (?, ?)', (db, generate_key(mpassword1)))
+                cursor.execute('insert into map values (?, ?)',
+                               (db, generate_key(mpassword1)))
                 connect.commit()
                 cursor.close()
                 connect.close()
             else:
                 connect = sqlite3.connect("masterpassword.db")
                 cursor = connect.cursor()
-                cursor.execute('insert into map values(?, ?)', (db, generate_key(mpassword1)))
+                cursor.execute('insert into map values(?, ?)',
+                               (db, generate_key(mpassword1)))
                 connect.commit()
                 cursor.close()
                 connect.close()
-            
+
             break
         else:
             print(" Passwords Not Matching Try Again !!!\n")
-    
+
 
 def get_masterpassword(db):
     db = valid_db(db)
@@ -122,10 +134,11 @@ def get_masterpassword(db):
     except Exception as e:
         print("masterpassword.db file is corrupted!!!\n")
 
+
 def create_database(db):
     db = valid_db(db)
     task_start()
-    
+
     if os.path.exists(db):
         print(" Database Already Exists !!!")
         task_fail()
@@ -139,14 +152,15 @@ def create_database(db):
                         password varchar(2000),
                         website varchar(250)
                         )''')
-    
+
     create_masterpassword(db)
     connect.commit()
     cursor.close()
     connect.close()
     task_end()
 
-def delete_database(db, mode = 'n'):
+
+def delete_database(db, mode='n'):
     db = valid_db(db)
     task_start()
     if mode == 'n':
@@ -165,17 +179,19 @@ def delete_database(db, mode = 'n'):
     print("\n Database Not Found!\n")
     task_fail()
 
+
 def create_account(db, account, username, website):
     db = valid_db(db)
     if check(db) is False:
-        return 
+        return
     task_start()
     connect = sqlite3.connect(db)
     cursor = connect.cursor()
     try:
         masterpassword = get_masterpassword(db)
         password = generate_key(masterpassword)
-        cursor.execute("insert into passwordb values(?, ?, ?, ?)",(account, username, password, website))
+        cursor.execute("insert into passwordb values(?, ?, ?, ?)",
+                       (account, username, password, website))
         print(' Account created successfully!')
     except Exception as e:
         print(" Invalid Data ;( ")
@@ -186,6 +202,7 @@ def create_account(db, account, username, website):
     cursor.close()
     connect.close()
     task_end()
+
 
 def modify_account(db, account, username):
     db = valid_db(db)
@@ -198,7 +215,8 @@ def modify_account(db, account, username):
     password = generate_key(masterpassword)
 
     try:
-        x = cursor.execute("select website from passwordb where account=? and username=?", (account, username)).fetchall()
+        x = cursor.execute(
+            "select website from passwordb where account=? and username=?", (account, username)).fetchall()
         if len(x) == 0:
             print(" No such Entry Exists in Database!!!")
             task_end()
@@ -206,14 +224,16 @@ def modify_account(db, account, username):
     except Exception as e:
         print(" Invalid Data!!!")
         task_end()
-        return 
-    
-    cursor.execute("update passwordb set password=? where account=? and username=?", (password, account, username))
-    print(' New Password generated successfully!') 
+        return
+
+    cursor.execute("update passwordb set password=? where account=? and username=?",
+                   (password, account, username))
+    print(' New Password generated successfully!')
     connect.commit()
     cursor.close()
     connect.close()
     task_end()
+
 
 def delete_account(db, account, username):
     db = valid_db(db)
@@ -224,7 +244,8 @@ def delete_account(db, account, username):
     cursor = connect.cursor()
 
     try:
-        x = cursor.execute("select website from passwordb where account=? and username=?", (account, username)).fetchall()
+        x = cursor.execute(
+            "select website from passwordb where account=? and username=?", (account, username)).fetchall()
         if len(x) == 0:
             print(" No such Entry Exists in Database!!!")
             task_end()
@@ -232,14 +253,16 @@ def delete_account(db, account, username):
     except Exception as e:
         print(" Invalid Data!!!")
         task_end()
-        return 
-    
-    cursor.execute("delete from passwordb where account=? and username=?", (account, username))
+        return
+
+    cursor.execute(
+        "delete from passwordb where account=? and username=?", (account, username))
     print(' Deleted Account Successfully!')
     connect.commit()
     cursor.close()
     connect.close()
     task_end()
+
 
 def view_accounts(db):
     db = valid_db(db)
@@ -248,30 +271,33 @@ def view_accounts(db):
     print()
     connect = sqlite3.connect(db)
     cursor = connect.cursor()
-    
+
     try:
-        accountlist = cursor.execute("select account , username from passwordb ").fetchall()
+        accountlist = cursor.execute(
+            "select account , username from passwordb ").fetchall()
     except Exception as e:
         print(" Invalid Data Entered!!!")
         return
-    
+
     try:
         maxrecordlength = len(accountlist[0][0])
     except IndexError:
         print(' No Accounts Found!')
         return
     for record in accountlist:
-        if len(record[0]) > maxrecordlength :
-            maxrecordlength = len(record[0]) 
-    
+        if len(record[0]) > maxrecordlength:
+            maxrecordlength = len(record[0])
+
     print(' Accounts' + '     ' + ' ' * (maxrecordlength - 8) + 'Usernames')
     print(' --------' + '     ' + ' ' * (maxrecordlength - 8) + '---------')
 
     for record in accountlist:
-        print(' ' + record[0] + '         ' + ' ' * (maxrecordlength - len(record[0])) + record[1])
+        print(' ' + record[0] + '         ' + ' ' *
+              (maxrecordlength - len(record[0])) + record[1])
     cursor.close()
     connect.close()
     print()
+
 
 def view_databases():
     dbcount = 0
@@ -298,21 +324,23 @@ def view_databases():
     except Exception as e:
         print(' No Database Found!!!')
 
-def view_account(db,account):
+
+def view_account(db, account):
     db = valid_db(db)
     if check(db) is False:
         return
     task_start()
     masterpassword = getpass.getpass(' Enter Master Password:')
     masterkey = get_masterpassword(db)
-    masterkey = en(masterpassword,masterkey)
+    masterkey = en(masterpassword, masterkey)
     connect = sqlite3.connect(db)
     cursor = connect.cursor()
     try:
-        output = cursor.execute("select account ,username , password , website from passwordb where account=?  ", (account,)).fetchall()
+        output = cursor.execute(
+            "select account ,username , password , website from passwordb where account=?  ", (account,)).fetchall()
         print(' Account:', output[0][0])
         print(' Username:', output[0][1])
-        
+
         if output[0][3].lower() != 'null':
             print(' Website:', output[0][3])
 
@@ -329,6 +357,7 @@ def view_account(db,account):
     cursor.close()
     connect.close()
 
+
 def export(db):
     db = valid_db(db)
     task_start()
@@ -338,7 +367,7 @@ def export(db):
     connect = sqlite3.connect(db)
     cursor = connect.cursor()
     os.chdir('..')
-    with open((db[:-4] + '.csv'), 'w', newline = '') as csvfile:
+    with open((db[:-4] + '.csv'), 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerows(cursor.execute('select * from passwordb').fetchall())
     cursor.close()
@@ -351,6 +380,7 @@ def export(db):
     print('\nPlease store the above Token Securely, All data will be lost if it is lost...')
     task_end()
 
+
 def importt(db):
     db = valid_db(db)
     task_start()
@@ -360,7 +390,7 @@ def importt(db):
         task_fail()
         sys.exit(1)
     password = getpass.getpass(' Enter Secret Token:')
-    if len(password)%32 != 0:
+    if len(password) % 32 != 0:
         print('\n\a Invalid Token!!!')
         task_fail()
         return
@@ -395,7 +425,7 @@ def importt(db):
         finally:
             cursor.close()
             connect.close()
-    
+
     connect = sqlite3.connect(db)
     cursor = connect.cursor()
     cursor.execute('''create table passwordb ( 
@@ -404,13 +434,14 @@ def importt(db):
                         password varchar(2000),
                         website varchar(250)
                         )''')
-    
+
     os.chdir('..')
     try:
-        with open(file, newline = '') as csvfile:
-            reader = csv.reader(csvfile, dialect = 'excel')
+        with open(file, newline='') as csvfile:
+            reader = csv.reader(csvfile, dialect='excel')
             for line in reader:
-                cursor.execute('insert into passwordb values(?,?,?,?)', (line[0], line[1], line[2], line[3]))
+                cursor.execute('insert into passwordb values(?,?,?,?)',
+                               (line[0], line[1], line[2], line[3]))
     except Exception as e:
         print(e)
         sys.exit(1)
@@ -419,6 +450,7 @@ def importt(db):
     cursor.close()
     connect.close()
     task_end()
+
 
 def set_charset():
 
@@ -437,11 +469,12 @@ def set_charset():
             break
 
         elif choice == '2':
-            p.A = ('A','B','C','D','E','F','G','H','I','J','K','L','M','N','o','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9')
+            p.A = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'o', 'P', 'Q', 'R',
+                   'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
             break
-        
+
         elif choice == '3':
-            p.A = ('0','1','2','3','4','5','6','7','8','9')
+            p.A = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
             break
 
         elif choice == '4':
@@ -449,13 +482,13 @@ def set_charset():
             os.chdir("..")
             fil = ''
             try:
-                with open(file,'r') as f:
+                with open(file, 'r') as f:
                     fil = f.read().strip()
-                
+
                 p.A = []
                 for i in fil:
                     p.A.append(i)
-                
+
                 p.A = tuple(p.A)
 
                 os.chdir('PyPassDB')
@@ -464,6 +497,6 @@ def set_charset():
                 time.sleep(3)
                 sys.exit(1)
             break
-            
+
         print('Please enter valid choice! Either 1 or 2 or 3 or 4')
-    cls()     
+    cls()
